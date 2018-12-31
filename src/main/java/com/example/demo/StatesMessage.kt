@@ -2,7 +2,8 @@ package com.example.demo
 
 import com.alibaba.fastjson.JSONObject
 
-data class StatesMessage @JvmOverloads constructor(val command: String = "states", var states: States = States()) {
+data class StatesMessage @JvmOverloads constructor(var command: String = "states",
+                                                   var states: States = States(x=3.0,y=3.0)) {
 
     fun toJsonString(): String {
         return JSONObject.toJSONString(this)

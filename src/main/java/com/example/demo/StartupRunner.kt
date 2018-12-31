@@ -1,6 +1,7 @@
 package com.example.demo
 
 import com.alibaba.fastjson.JSON
+import com.google.gson.Gson
 import org.apache.logging.log4j.LogManager
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
@@ -17,12 +18,16 @@ class StartupRunner : CommandLineRunner {
         statesMessage.states.y = 1.0
         logger.info(statesMessage.toJsonString())
 
-        val s = "{\"states\":{\"x\":5.0,\"y\":5.0,\"yaw\":1.57,\"battery\": 0.56, \"error\": 0.0},\"command\":\"states\"}"
+        val s = "{\"states\":{\"x\":5.0,\"y\":5.0},\"command\":\"states\"}"
+
 
         val state1 = JSON.parseObject(s, StatesMessage1::class.java)
         logger.info(state1)
 
+        /* it will throw exception
         val state = JSON.parseObject(s, StatesMessage::class.java)
+        */
+        val state = Gson().fromJson(s, StatesMessage::class.java)
         logger.info(state.states.x)
         logger.info(state.states.y)
 
